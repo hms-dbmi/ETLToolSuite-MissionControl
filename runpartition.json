@@ -1,7 +1,7 @@
 {
     "resourcesdir": "resources/",
     "datadir": "data/",
-    "studybucket": "s3://<bucket_name>",
+    "studybucket": "s3://mesa-test-load",
     "mappingdir": "mappings/",
     "jobconfig": "resources/job.config",
     "writedir": "completed/",
