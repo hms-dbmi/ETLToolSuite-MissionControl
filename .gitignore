@@ -2,3 +2,5 @@
 /data/*
 /.project
 /.pydevproject
+/resources/config.part*.config
+/mappings/mapping.part*
