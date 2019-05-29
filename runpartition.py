@@ -3,7 +3,7 @@ from subprocess import *
 
 # set project home variable
 projecthome = os.environ.get('ETL_PROJECT_HOME', './') # sets where script is executed if envvar is not set
-print projecthome
+print 'Project Home is set to ' + projecthome 
 # set variables
 with open(projecthome + '/runpartition.json') as json_data:
     data = json.load(json_data)
@@ -100,7 +100,7 @@ if runcurator == 'Y':
     #mainlogger.error(''.join(stderr))      
 ## Data Evaluations
 if rundataeval == 'Y':
-    args = ['java', '-jar', 'DataEvaluation.jar', '-datadir', datadir, '-mappingfile', mappingdir + '/' + mappingfilename, '-writedir', writedir]
+    args = ['java', '-jar', 'DataEvaluation.jar', '-datadir', datadir, '-mappingfile', mappingdir + '/' + mappingfilename, '-writedir', resourcesdir]
     mainlogger.info('Starting: ' + ' '.join(args))
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
