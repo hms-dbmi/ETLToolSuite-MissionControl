@@ -26,12 +26,20 @@ with open(projecthome + '/runpartition.json') as json_data:
     rundataeval = data.get('rundataeval', 'Y/').upper()
     runpartitioning = data.get('runpartitioning', 'Y').upper()
     rungenerator = data.get('rungenerator', 'Y/').upper()
-    
+    rundataload = data.get('rundataload', 'Y/').upper()
+
     # Logging variables
     loglevel = (getattr(logging, data.get('loglevel', 'INFO').upper(), None))
     logdir = data.get('logdir', '/var/logs/')
     clearlogs = data.get('clearlogs', 'Y').upper()
     archivelogs = data.get('archivelogs', 'N').upper()
+
+    # Data Load variables
+    # User and pass need to be setup outside this process or be pulled from vault secrets
+    dburl = os.environ.get('DB_HOST','')
+    dbuser = os.environ.get('DB_USERNAME','root')
+    dbpass = os.environ.get('DB_PASSWORD','')
+    dbscriptdir = data.get('dbscriptdir','')
 
 #logging
 #function to setup logging
@@ -142,4 +150,5 @@ if rungenerator == 'Y':
     logmsgs(mainlogger, stdout, stderr)
     mainlogger.info('Finished: ' + ' '.join(args))
 
-
+if rundataload == 'Y':
+    args = ['sh', 'LoadTables.sh', '-u', str(dburl), '-o', dbuser, '-p', dbpass, '-c', writedir, '-s', dbscriptdir]        
