@@ -23,10 +23,10 @@ with open(projecthome + '/runpartition.json') as json_data:
     # Job variables
     syncproject = data.get('syncproject', 'N').upper()
     runcurator = data.get('runcurator', 'Y').upper()
-    rundataeval = data.get('rundataeval', 'Y/').upper()
+    rundataeval = data.get('rundataeval', 'Y').upper()
     runpartitioning = data.get('runpartitioning', 'Y').upper()
-    rungenerator = data.get('rungenerator', 'Y/').upper()
-    rundataload = data.get('rundataload', 'Y/').upper()
+    rungenerator = data.get('rungenerator', 'Y').upper()
+    rundataload = data.get('rundataload', 'Y').upper()
 
     # Logging variables
     loglevel = (getattr(logging, data.get('loglevel', 'INFO').upper(), None))
@@ -39,7 +39,7 @@ with open(projecthome + '/runpartition.json') as json_data:
     dburl = os.environ.get('DB_HOST','')
     dbuser = os.environ.get('DB_USERNAME','root')
     dbpass = os.environ.get('DB_PASSWORD','')
-    dbscriptdir = data.get('dbscriptdir','')
+    dbscriptdir = data.get('dbscriptdir', projecthome + '/oracle/ctl/TRUNCATE/')
 
 #logging
 #function to setup logging
