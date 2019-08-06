@@ -19,14 +19,15 @@ with open(projecthome + '/runpartition.json') as json_data:
     patientconfig = data.get('patientconfig', projecthome +'/resources/patient.config')
     maxjobs = data.get('maxjobs', 10)
     jobmemory = data.get('jobmemory', '2g')
+    trialid = data.get('trialid', 'default')
     
     # Job variables
     syncproject = data.get('syncproject', 'N').upper()
     runcurator = data.get('runcurator', 'Y').upper()
-    rundataeval = data.get('rundataeval', 'Y/').upper()
+    rundataeval = data.get('rundataeval', 'Y').upper()
     runpartitioning = data.get('runpartitioning', 'Y').upper()
-    rungenerator = data.get('rungenerator', 'Y/').upper()
-    rundataload = data.get('rundataload', 'Y/').upper()
+    rungenerator = data.get('rungenerator', 'Y').upper()
+    rundataload = data.get('rundataload', 'Y').upper()
 
     # Logging variables
     loglevel = (getattr(logging, data.get('loglevel', 'INFO').upper(), None))
@@ -99,7 +100,7 @@ if syncproject == 'Y':
 ## main
 # Data Curator
 if runcurator == 'Y':
-    args = ['java', '-jar', 'DataCurator.jar', '-datadir', datadir]
+    args = ['java', '-jar', 'DataCurator.jar', '-configfile', jobconfig]
     mainlogger.info('Starting: ' + ' '.join(args))
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
@@ -108,7 +109,7 @@ if runcurator == 'Y':
     #mainlogger.error(''.join(stderr))      
 ## Data Evaluations
 if rundataeval == 'Y':
-    args = ['java', '-jar', 'DataEvaluation.jar', '-datadir', datadir, '-mappingfile', mappingdir + '/' + mappingfilename, '-writedir', resourcesdir]
+    args = ['java', '-jar', 'DataEvaluation.jar', '-configfile', jobconfig]
     mainlogger.info('Starting: ' + ' '.join(args))
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
@@ -125,11 +126,20 @@ if runpartitioning == 'Y':
 
 ## Generate Patients
 if rungenerator == 'Y':
-    args = ['java', '-jar', 'EntityGenerator.jar', '-propertiesfile', patientconfig, '-jobtype', 'CSVToI2b2TM' ]
+    args = ['java', '-jar', 'PatientGenerator.jar', '-configfile', jobconfig ]
     mainlogger.info('Starting: ' + ' '.join(args))
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
     mainlogger.info('Finished: ' + ' '.join(args))
+
+## Sequence Patients
+    args = ['java', '-jar', 'PatientSequencer.jar', '-configfile', jobconfig ]
+    
+    mainlogger.info('Starting: ' + ' '.join(args))
+    stdout,stderr = cmdWrapper(*args)
+    logmsgs(mainlogger, stdout, stderr)
+    mainlogger.info('Finished: ' + ' '.join(args))
+
     
 ## Process partitions this will generate the rest of the entities.
     #for file in os.listdir(resourcesdir):
@@ -142,13 +152,30 @@ if rungenerator == 'Y':
     logmsgs(mainlogger, stdout, stderr)
     mainlogger.info('Finished: ' + ' '.join(args))
 
-## Run data cleanup
-    args = ['java', '-jar', 'DataCleanUp.jar', '-datadir', datadir ]
+## Process Fill in Tree
+    args = ['java', '-jar', 'FillInTree.jar', '-configfile', jobconfig ]
     
     mainlogger.info('Starting: ' + ' '.join(args))
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
     mainlogger.info('Finished: ' + ' '.join(args))
+
+## Process Concept Counts
+    args = ['java', '-jar', 'CountGenerator.jar', '-configfile', jobconfig ]
+    
+    mainlogger.info('Starting: ' + ' '.join(args))
+    stdout,stderr = cmdWrapper(*args)
+    logmsgs(mainlogger, stdout, stderr)
+    mainlogger.info('Finished: ' + ' '.join(args))
+
+
+## Run data cleanup
+#    args = ['java', '-jar', 'DataCleanUp.jar', '-datadir', datadir ]
+    
+#    mainlogger.info('Starting: ' + ' '.join(args))
+#    stdout,stderr = cmdWrapper(*args)
+#    logmsgs(mainlogger, stdout, stderr)
+#    mainlogger.info('Finished: ' + ' '.join(args))
 
 if rundataload == 'Y':
     args = ['sh', 'LoadTables.sh', '-u', str(dburl), '-o', dbuser, '-p', dbpass, '-c', writedir, '-s', dbscriptdir]        
