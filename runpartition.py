@@ -161,12 +161,12 @@ if rungenerator == 'Y':
     mainlogger.info('Finished: ' + ' '.join(args))
 
 ## Process Concept Counts
-    args = ['java', '-jar', 'CountGenerator.jar', '-configfile', jobconfig ]
+#    args = ['java', '-jar', 'CountGenerator3.jar', '-configfile', jobconfig ]
     
-    mainlogger.info('Starting: ' + ' '.join(args))
-    stdout,stderr = cmdWrapper(*args)
-    logmsgs(mainlogger, stdout, stderr)
-    mainlogger.info('Finished: ' + ' '.join(args))
+ #   mainlogger.info('Starting: ' + ' '.join(args))
+  #  stdout,stderr = cmdWrapper(*args)
+   # logmsgs(mainlogger, stdout, stderr)
+    #mainlogger.info('Finished: ' + ' '.join(args))
 
 
 ## Run data cleanup
