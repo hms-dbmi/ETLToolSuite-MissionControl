@@ -100,7 +100,7 @@ if syncproject == 'Y':
 ## main
 # Data Curator
 if runcurator == 'Y':
-    args = ['java', '-jar', 'DataCurator.jar', '-configfile', jobconfig]
+    args = ['java', '-jar', 'DataCurator.jar', '-propertiesfile', jobconfig]
     mainlogger.info('Starting: ' + ' '.join(args))
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
@@ -109,7 +109,7 @@ if runcurator == 'Y':
     #mainlogger.error(''.join(stderr))      
 ## Data Evaluations
 if rundataeval == 'Y':
-    args = ['java', '-jar', 'DataEvaluation.jar', '-configfile', jobconfig]
+    args = ['java', '-jar', 'DataEvaluation.jar', '-propertiesfile', jobconfig]
     mainlogger.info('Starting: ' + ' '.join(args))
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
@@ -118,7 +118,7 @@ if rundataeval == 'Y':
     #mainlogger.error(''.join(stderr))  
 ## Partitioner
 if runpartitioning == 'Y':
-    args = ['java', '-jar', 'Partitioner.jar', '-configfile', jobconfig]
+    args = ['java', '-jar', 'Partitioner.jar', '-propertiesfile', jobconfig]
     mainlogger.info('Starting: ' + ' '.join(args))
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
@@ -126,14 +126,14 @@ if runpartitioning == 'Y':
 
 ## Generate Patients
 if rungenerator == 'Y':
-    args = ['java', '-jar', 'PatientGenerator.jar', '-configfile', jobconfig ]
+    args = ['java', '-jar', 'PatientGenerator.jar', '-propertiesfile', jobconfig ]
     mainlogger.info('Starting: ' + ' '.join(args))
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
     mainlogger.info('Finished: ' + ' '.join(args))
 
 ## Sequence Patients
-    args = ['java', '-jar', 'PatientSequencer.jar', '-configfile', jobconfig ]
+    args = ['java', '-jar', 'PatientSequencer.jar', '-propertiesfile', jobconfig ]
     
     mainlogger.info('Starting: ' + ' '.join(args))
     stdout,stderr = cmdWrapper(*args)
@@ -153,7 +153,7 @@ if rungenerator == 'Y':
     mainlogger.info('Finished: ' + ' '.join(args))
 
 ## Process Fill in Tree
-    args = ['java', '-jar', 'FillInTree.jar', '-configfile', jobconfig ]
+    args = ['java', '-jar', 'FillInTree.jar', '-propertiesfile', jobconfig ]
     
     mainlogger.info('Starting: ' + ' '.join(args))
     stdout,stderr = cmdWrapper(*args)
@@ -161,7 +161,7 @@ if rungenerator == 'Y':
     mainlogger.info('Finished: ' + ' '.join(args))
 
 ## Process Concept Counts
-#    args = ['java', '-jar', 'CountGenerator3.jar', '-configfile', jobconfig ]
+    args = ['java', '-jar', 'CountGenerator3.jar', '-propertiesfile', jobconfig ]
     
  #   mainlogger.info('Starting: ' + ' '.join(args))
   #  stdout,stderr = cmdWrapper(*args)
