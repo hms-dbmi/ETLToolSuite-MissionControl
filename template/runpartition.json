@@ -19,5 +19,6 @@
     "syncproject": "Y",
     "clearlogs": "Y",
     "archivelogs": "Y",
+    "rundataload": "N",
     "dbscriptdir": "oracle/ctl/TRUNCATE/"
 }
