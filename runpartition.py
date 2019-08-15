@@ -152,6 +152,14 @@ if rungenerator == 'Y':
     logmsgs(mainlogger, stdout, stderr)
     mainlogger.info('Finished: ' + ' '.join(args))
 
+## Merge Partitions
+    args = ['java', '-jar', 'DataMerge.jar', '-propertiesfile', jobconfig ]
+    
+    mainlogger.info('Starting: ' + ' '.join(args))
+    stdout,stderr = cmdWrapper(*args)
+    logmsgs(mainlogger, stdout, stderr)
+    mainlogger.info('Finished: ' + ' '.join(args))
+
 ## Process Fill in Tree
     args = ['java', '-jar', 'FillInTree.jar', '-propertiesfile', jobconfig ]
     
