@@ -1,10 +1,9 @@
 LOAD DATA 
-INFILE 'ObjectMapping.csv'
-BADFILE 'ObjectMapping.bad'
-DISCARDFILE 'ObjectMapping.dsc'
+INFILE 'PatientMapping.csv'
+BADFILE 'PatientMapping.bad'
+DISCARDFILE 'PatientMapping.dsc'
 APPEND 
 INTO TABLE i2b2demodata.PATIENT_MAPPING
-WHEN PATIENT_IDE LIKE 'ID%'
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 TRAILING NULLCOLS
