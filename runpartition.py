@@ -186,6 +186,7 @@ if rungenerator == 'Y':
     mainlogger.info('Starting: ' + ' '.join(args))
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
+    
     mainlogger.info('Finished: ' + ' '.join(args))
 
 ## Upload completed data to completed folder
@@ -198,4 +199,4 @@ if rungenerator == 'Y':
 
     totalRunTime = time.time() - startTime
 
-    mainlogger(studyid + ' finished in ' + totalRunTime  + 'secs')
+    mainlogger.info(studyid + ' finished in ' + totalRunTime  + 'secs')
