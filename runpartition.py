@@ -91,7 +91,7 @@ def cmdWrapper(*args):
 ## Data Sync
 #  Syncs a project's bucket 
 if syncproject == 'Y':
-    args = ['aws', 's3', 'sync', str(studybucket), projecthome, '-exclude', 'completed/*']
+    args = ['aws', 's3', 'sync', str(studybucket), projecthome, '--exclude', studybucket + 'completed/*']
     mainlogger.info('Starting: ' + ' '.join(args))
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
