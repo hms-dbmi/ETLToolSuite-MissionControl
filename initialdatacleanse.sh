@@ -27,6 +27,8 @@ if [ "${2^^}" != "Y" ];
       java -jar DbgapTreeBuilder.jar -propertiesfile resources/job.config -encodedlabel $2
 fi
 
+java -jar DataAnalyzer.jar -propertiesfile processing/new.config
+
 # sync built structure ready for data load
 aws s3 cp completed/ s3://stage-$1-etl/data/ --recursive
 aws s3 cp mappings/mapping.csv s3://stage-$1-etl/mappings/mapping.csv
