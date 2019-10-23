@@ -170,8 +170,15 @@ if rungenerator == 'Y':
     mainlogger.info('Starting: ' + ' '.join(args))
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
-#    logmsgs(mainlogger, stdout, stderr)
-#    mainlogger.info('Finished: ' + ' '.join(args))
+    logmsgs(mainlogger, stdout, stderr)
+    mainlogger.info('Finished: ' + ' '.join(args))
+
+## Switch to i2b2 path separator
+    args = ['java', '-jar', 'FixPaths.jar', '-propertiesfile', jobconfig ]
+
+    mainlogger.info('Starting: ' + ' '.join(args))
+    stdout,stderr = cmdWrapper(*args)
+    logmsgs(mainlogger, stdout, stderr)
 
 totalRunTime = time.time() - startTime
 
