@@ -39,3 +39,4 @@ aws s3 cp mappings/mapping.csv.patient s3://stage-$1-etl/mappings/mapping.csv.pa
 aws s3 cp processing/new.config s3://stage-$1-etl/resources/job.config
 aws s3 cp processing/new.json s3://stage-$1-etl/runpartition.json
 
+#bash cleanupfolders.sh
