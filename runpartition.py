@@ -49,14 +49,11 @@ with open(projecthome + '/runpartition.json') as json_data:
 def setup_logger(name, log_file, level=loglevel, formatter=''):
     """Function setup as many loggers as you want"""
 
- dsfadf:        QQ1`   handler = logging.FileHandler(log_file)
+    handler = logging.FileHandler(log_file)
     handler.setFormatter(formatter)
 
     logger = logging.getLogger(name)
     logger.setLevel(level)
-    logger.addHandler(handler)
-
-"runpartition.py" 211L, 9019C
     logger.addHandler(handler)
 
     return logger
