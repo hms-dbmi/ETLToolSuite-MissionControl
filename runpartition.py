@@ -180,6 +180,13 @@ if rungenerator == 'Y':
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
 
+## empty completed bucket on s3
+    args = ['aws', 's3', 'rm', str(studybucket) + 'completed/', '--recursive' ]
+
+    mainlogger.info('Starting: ' + ' '.join(args))
+    stdout,stderr = cmdWrapper(*args)
+    logmsgs(mainlogger, stdout, stderr)
+    
 ## Upload completed data to completed folder
     args = ['aws', 's3', 'cp',  projecthome + 'completed/', str(studybucket) + 'completed/', '--recursive' ]
 
