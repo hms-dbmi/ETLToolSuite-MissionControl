@@ -54,8 +54,8 @@ rm -rf resources/dataevaluation.txt
 rm -rf mappings/mapping.csv
 rm -rf resources/job.config
 
-aws s3 cp s3://stage-$1-etl/data/ data/
-aws s3 cp s3://stage-$1-etl/mapping/mapping.csv mappings/mapping.csv
+aws s3 cp s3://stage-$1-etl/data/ data/ --recursive
+aws s3 cp s3://stage-$1-etl/mappings/mapping.csv mappings/mapping.csv 
 aws s3 cp s3://stage-$1-etl/resources/job.config resources/job.config
 
 java -jar DataEvaluation.jar -propertiesfile resources/job.config
