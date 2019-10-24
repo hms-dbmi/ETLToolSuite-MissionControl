@@ -32,10 +32,10 @@ aws s3 cp s3://stage-$1-etl/rawData/dict/ dict/ --recursive
 # Build Hierarchies
 if [ "${2^^}" != "Y" ];
    then
-      echo "then"
-      java -jar DbgapTreeBuilder.jar -propertiesfile resources/job.config -data
+      echo "Building Hierarchy"
+      java -jar DbgapTreeBuilder.jar -propertiesfile resources/job.config
    else
-      echo "else"
+      echo "Building Hierarchy"
       java -jar DbgapTreeBuilder.jar -propertiesfile resources/job.config -encodedlabel $2
 fi
 
