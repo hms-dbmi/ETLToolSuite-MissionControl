@@ -16,9 +16,8 @@ cp template/job.config resources/job.config
 sed "s/trialid.*/trailid=${1^^}/" resources/job.config > processing/new.config
 sed "s/rootnode=.*/rootnode=/" processing/new.config > processing/new2.config
 sed "s/dataquotedstring=.*/dataquotedstring=ç/" processing/new2.config > processing/new3.config
-sed "s/datadelimiter=.*/datadelimiter=\t/" processing/new3.config > processing/new4.config
 
-cp processing/new4.config resources/job.config
+cp processing/new3.config resources/job.config
 
 # update json config
 sed "s/stage-.*-etl/stage-$1-etl/" runpartition.json > processing/new.json
