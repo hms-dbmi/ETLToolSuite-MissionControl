@@ -42,7 +42,7 @@ aws s3 cp completed/ s3://stage-$1-etl/data/ --recursive
 aws s3 cp mappings/mapping.csv s3://stage-$1-etl/mappings/mapping.csv
 aws s3 cp mappings/bad_mappings.csv s3://stage-$1-etl/mappings/bad_mappings.csv
 aws s3 cp mappings/mapping.csv.patient s3://stage-$1-etl/mappings/mapping.csv.patient
-aws s3 cp data/ s3://stage-$1-etl/data/
+aws s3 cp data/ s3://stage-$1-etl/data/ --recursive
 
 # Sync config files
 aws s3 cp resources/job.config s3://stage-$1-etl/resources/job.config
