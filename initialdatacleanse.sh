@@ -33,10 +33,10 @@ aws s3 cp s3://stage-$1-etl/rawData/dict/ dict/ --recursive
 if [ "${2^^}" != "Y" ];
    then
       echo "Building Hierarchy"
-      java -jar DbgapTreeBuilder.jar -propertiesfile resources/job.config
+      java -jar DbgapTreeBuilder.jar -propertiesfile resources/job.config -Xmx20g
    else
       echo "Building Hierarchy"
-      java -jar DbgapTreeBuilder.jar -propertiesfile resources/job.config -encodedlabel $2
+      java -jar DbgapTreeBuilder.jar -propertiesfile resources/job.config -encodedlabel $2 -Xmx20g
 fi
 
 java -jar DataAnalyzer.jar -propertiesfile resources/job.config
