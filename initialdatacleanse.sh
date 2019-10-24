@@ -11,10 +11,14 @@ rm -rf processing/*
 NPROC=$(nproc --all)
 echo $NPROC
 
+cp template/job.config resources/job.config
 # update job config trial id
 sed "s/trialid.*/trailid=${1^^}/" resources/job.config > processing/new.config
 sed "s/rootnode=.*/rootnode=/" processing/new.config > processing/new2.config
-cp processing/new2.config resources/job.config
+sed "s/dataquotedstring=.*/dataquotedstring=ç/" processing/new2.config > processing/new3.config
+sed "s/datadelimiter=.*/datadelimiter=\t/" processing/new3.config > processing/new4.config
+
+cp processing/new4.config resources/job.config
 
 # update json config
 sed "s/stage-.*-etl/stage-$1-etl/" runpartition.json > processing/new.json
@@ -29,7 +33,7 @@ aws s3 cp s3://stage-$1-etl/rawData/dict/ dict/ --recursive
 if [ "${2^^}" != "Y" ];
    then
       echo "then"
-      java -jar DbgapTreeBuilder.jar -propertiesfile resources/job.config
+      java -jar DbgapTreeBuilder.jar -propertiesfile resources/job.config -data
    else
       echo "else"
       java -jar DbgapTreeBuilder.jar -propertiesfile resources/job.config -encodedlabel $2
