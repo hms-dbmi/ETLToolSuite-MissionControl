@@ -18,4 +18,6 @@ for studyid in ${studyids[@]}; do
 
 	python runpartition.py
 
+	aws s3 cp completed/ s3://stage-$studyid-etl/completed/ --recursive
+
 done
