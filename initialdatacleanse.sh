@@ -27,7 +27,7 @@ cp processing/new3.config resources/job.config
 # update json config
 sed "s/stage-.*-etl/stage-$1-etl/" runpartition.json > processing/new.json
 sed "s/\"maxjobs\": 3/\"maxjobs\": $NPROC/" processing/new.json > processing/new2.json
-cp processing/new2.json runpartition.json 
+cp processing/new2.json runpartition.json
 
 echo ''
 echo '------------------------'
@@ -46,6 +46,8 @@ if [ "${2^^}" != "Y" ];
    else
       java -jar DbgapTreeBuilder.jar -propertiesfile resources/job.config -encodedlabel $2
 fi
+
+cp completed/* data/
 
 echo ''
 echo '------------------------'
@@ -70,14 +72,6 @@ echo ''
 echo '------------------------'
 echo 'Running data evaluation'
 # Run Data Evaluation
-rm -rf data/*
-rm -rf resources/dataevaluation.txt
-rm -rf mappings/mapping.csv
-rm -rf resources/job.config
-
-aws s3 cp s3://stage-$1-etl/data/ data/ --recursive
-aws s3 cp s3://stage-$1-etl/mappings/mapping.csv mappings/mapping.csv 
-aws s3 cp s3://stage-$1-etl/resources/job.config resources/job.config
 
 java -jar DataEvaluation.jar -propertiesfile resources/job.config
 
