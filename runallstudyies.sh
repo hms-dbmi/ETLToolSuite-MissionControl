@@ -22,7 +22,7 @@ for studyid in ${studyids[@]}; do
 	sed "s/\"maxjobs\": 3/\"maxjobs\": $NPROC/" runpartition.json > runpartition2.json
 	mv runpartition2.json runpartition.json
 
-	vi python runpartition.py
+	python runpartition.py
 
 	aws s3 cp s3://stage-general-etl/data_evaluations/${studyid}_dataevalution.txt ./resources/dataevalution.txt
 
