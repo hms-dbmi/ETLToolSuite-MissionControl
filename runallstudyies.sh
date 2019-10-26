@@ -2,11 +2,12 @@
 
 NPROC=$(nproc --all)
 #NPROC=$(sysctl -n hw.physicalcpu)
-studyids=("aric" "mesa" "fhs" "whi" "safs" "sage" "sarcoidosis" "sas" "thrv" "cfs" "chs" "copdgene" "cra")
 
-studyids=( "bags" "ccaf" "dhs" "eocopd" "galaii" "genestar" "genoa" "gensalt" "goldn" "hchs" "hrmn" "hvh" "hypergen" "jhs" "mghaf" "partners" "vafar" "vuaf" "wghs" "hvh" "jhs" "mayovte")
+studyids=( "bags" )
 
-#studyids=(   
+#studyids=("aric" "mesa" "fhs" "whi" "safs" "sage" "sarcoidosis" "sas" "thrv" "cfs" "chs" "copdgene" "cra")
+
+#studyids=( "bags" "ccaf" "dhs" "eocopd" "galaii" "genestar" "genoa" "gensalt" "goldn" "hchs" "hrmn" "hvh" "hypergen" "jhs" "mghaf" "partners" "vafar" "vuaf" "wghs" "hvh" "jhs" "mayovte")
 
 for studyid in ${studyids[@]}; do
 
@@ -38,7 +39,7 @@ for studyid in ${studyids[@]}; do
 			echo $studyid ' patient count does not match expected' > $(hostname)_badstudy.bad
 			echo 'Actual patient count ' $patcount 'expected_count' $expected_count
 			echo 'Actual patient count ' $patcount 'expected_count' $expected_count > $(hostname)_badstudy.bad
-			aws s3 cp $(hostname)_badstudys.bad s3://stage-general-etl/logs/$(hostname)_badstudys.bad
+			aws s3 cp $(hostname)_badstudy.bad s3://stage-general-etl/logs/$(hostname)_badstudys.bad
 
 	fi
 
