@@ -29,7 +29,7 @@ for studyid in ${studyids[@]}; do
 
 	expected_count=$(cat resources/dataevaluation.txt | grep 'Total expected patients:' | sed 's/Total expected patients: //')
 
-	patcount=$(wc -l completed/PatientDimension.csv)
+	patcount=$((wc -l completed/PatientDimension.csv) - 1)
 
 	if [[ expected_count == patcount ]]; 
 		then
