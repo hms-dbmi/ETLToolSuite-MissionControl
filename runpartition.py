@@ -96,23 +96,23 @@ def cmdWrapper(*args):
 #  Syncs a project's bucket
 if syncproject == 'Y':
     #args = ['aws', 's3', 'sync', str(studybucket), projecthome, '--exclude','completed/*','--include', 'data/*','--include','mappings/*','--include','resources/*' ]
-    args = ['aws', 's3', 'cp', str(studybucket) + 'data/', projecthome + '/data/', '--recursive' ]
+    args = ['aws', 's3', 'cp', str(studybucket) + '/data/', projecthome + '/data/', '--recursive' ]
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
     
-    args = ['aws', 's3', 'cp', str(studybucket) + 'mappings/mapping.csv', projecthome + '/mappings/mapping.csv' ]
+    args = ['aws', 's3', 'cp', str(studybucket) + '/mappings/mapping.csv', projecthome + '/mappings/mapping.csv' ]
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
     
-    args = ['aws', 's3', 'cp', str(studybucket) + 'mappings/mapping.csv.patient', projecthome + '/mappings/mapping.csv.patient' ]
+    args = ['aws', 's3', 'cp', str(studybucket) + '/mappings/mapping.csv.patient', projecthome + '/mappings/mapping.csv.patient' ]
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
     
-    args = ['aws', 's3', 'cp', str(studybucket) + 'resources/job.config', projecthome + '/resources/job.config' ]
+    args = ['aws', 's3', 'cp', str(studybucket) + '/resources/job.config', projecthome + '/resources/job.config' ]
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
 
-    args = ['aws', 's3', 'cp', str(studybucket) + 'runpartition.json', projecthome + 'runpartition.json' ]
+    args = ['aws', 's3', 'cp', str(studybucket) + '/runpartition.json', projecthome + 'runpartition.json' ]
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
 
@@ -198,19 +198,11 @@ if rungenerator == 'Y':
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
 
-## empty completed bucket on s3
-    args = ['aws', 's3', 'rm', str(studybucket) + 'completed/', '--recursive' ]
-
-    mainlogger.info('Starting: ' + ' '.join(args))
-    stdout,stderr = cmdWrapper(*args)
-    logmsgs(mainlogger, stdout, stderr)
-    
-    mainlogger.info('Finished: ' + ' '.join(args))
-
 ## Upload completed data to completed folder
-    args = ['aws', 's3', 'rm',  str(studybucket) + 'completed/', '--recursive' ]
-    args = ['aws', 's3', 'cp',  projecthome + 'completed/', str(studybucket) + 'completed/', '--recursive' ]
-
+    args = ['aws', 's3', 'rm',  str(studybucket) + '/completed/', '--recursive' ]
+    
+    args = ['aws', 's3', 'cp',  projecthome + '/completed/', str(studybucket) + '/completed/', '--recursive' ]
+    
     mainlogger.info('Starting: ' + ' '.join(args))
     stdout,stderr = cmdWrapper(*args)
     logmsgs(mainlogger, stdout, stderr)
