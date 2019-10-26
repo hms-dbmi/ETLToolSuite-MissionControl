@@ -24,7 +24,7 @@ for studyid in ${studyids[@]}; do
 
 	python runpartition.py
 
-	aws s3 cp s3://stage-general-etl/data_evaluations/${studyid}_dataevalution.txt ./resources/dataevalution.txt
+	aws s3 cp s3://stage-general-etl/data_evaluations/${studyid}_dataevaluation.txt ./resources/dataevaluation.txt
 
 	expected_count=$(cat resources/dataevaluation.txt | grep 'Total expected patients:' | sed 's/Total expected patients: //')
 
@@ -36,12 +36,13 @@ for studyid in ${studyids[@]}; do
 		else
 			echo $studyid ' patient count does not match expected' 
 			echo $studyid ' patient count does not match expected' > $(hostname)_badstudy.bad
-			echo 'Actual patient count ' patcount 'expected_count'
-			echo 'Actual patient count ' patcount 'expected_count' expected_count > $(hostname)_badstudy.bad
+			echo 'Actual patient count ' $patcount 'expected_count' $expected_count
+			echo 'Actual patient count ' $patcount 'expected_count' $expected_count > $(hostname)_badstudy.bad
+			aws s3 cp $(hostname)_badstudys.bad s3://stage-general-etl/logs/$(hostname)_badstudys.bad
+
 	fi
 
 	aws s3 cp /var/logs/main.log s3://stage-general-etl/logs/${studyid}_main.log
-	aws s3 cp $(hostname)_badstudys.bad s3://stage-general-etl/logs/$(hostname)_badstudys.bad
 
 	rm -rf /var/logs/*
 
