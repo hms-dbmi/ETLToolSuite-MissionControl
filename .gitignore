@@ -4,3 +4,9 @@
 /.pydevproject
 /resources/config.part*.config
 /mappings/mapping.part*
+/rawData/*
+/mappings/*
+/processing/*
+/resources/job.config
+/resources/dataevaluation.txt
+runpartition.json
