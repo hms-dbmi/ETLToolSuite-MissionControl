@@ -25,8 +25,10 @@ with open(projecthome + '/runpartition.json') as json_data:
 
     # Job variables
     syncproject = data.get('syncproject', 'N').upper()
-    runcurator = data.get('runcurator', 'Y').upper()
-    rundataeval = data.get('rundataeval', 'Y').upper()
+    #runcurator = data.get('runcurator', 'Y').upper()
+    runcurator = 'N'
+    #rundataeval = data.get('rundataeval', 'Y').upper()
+    rundataeval = 'N'
     runpartitioning = data.get('runpartitioning', 'Y').upper()
     rungenerator = data.get('rungenerator', 'Y').upper()
     rundataload = data.get('rundataload', 'Y').upper()
