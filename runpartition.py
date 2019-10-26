@@ -218,4 +218,4 @@ if rungenerator == 'Y':
 
     totalRunTime = time.time() - startTime
 
-    mainlogger.info(trialid + ' finished in ' + totalRunTime  + 'secs')
+    mainlogger.info(trialid + ' finished in ' + str(totalRunTime)  + ' seconds')
