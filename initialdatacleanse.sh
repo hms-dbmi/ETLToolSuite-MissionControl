@@ -25,7 +25,8 @@ sed "s/dataquotedstring=.*/dataquotedstring=ç/" processing/new2.config > proces
 cp processing/new3.config resources/job.config
 
 # update json config
-sed "s/stage-.*-etl/stage-$1-etl/" runpartition.json > processing/new.json
+cp template/runpartition.json runpartition.json
+sed "s/s3:\/\/<bucket_name>/stage-$1-etl/" runpartition.json > processing/new.json
 sed "s/\"maxjobs\": 3/\"maxjobs\": $NPROC/" processing/new.json > processing/new2.json
 cp processing/new2.json runpartition.json
 
