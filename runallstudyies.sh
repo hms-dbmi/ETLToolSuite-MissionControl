@@ -29,7 +29,7 @@ for studyid in ${studyids[@]}; do
 
 	expected_count=$(cat resources/dataevaluation.txt | grep 'Total expected patients:' | sed 's/Total expected patients: //')
 
-	patcount=$((wc -l completed/PatientDimension.csv) - 1)
+	patcount=$((wc -l completed/PatientDimension.csv) - 1))
 
 	if [[ expected_count == patcount ]]; 
 		then
@@ -39,7 +39,7 @@ for studyid in ${studyids[@]}; do
 			echo $studyid ' patient count does not match expected' > $(hostname)_badstudy.bad
 			echo 'Actual patient count ' $patcount 'expected_count' $expected_count
 			echo 'Actual patient count ' $patcount 'expected_count' $expected_count > $(hostname)_badstudy.bad
-			aws s3 cp $(hostname)_badstudy.bad s3://stage-general-etl/logs/$(hostname)_badstudys.bad
+			aws s3 cp $(hostname)_${studyid}.bad s3://stage-general-etl/logs/$(hostname)_badstudys.bad
 
 	fi
 
