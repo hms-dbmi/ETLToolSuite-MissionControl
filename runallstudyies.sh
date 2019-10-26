@@ -14,7 +14,7 @@ for studyid in ${studyids[@]}; do
 	aws s3 cp s3://stage-$studyid-etl/runpartition.json .
 	aws s3 cp s3://stage-$studyid-etl/resources/job.config ./resources/job.config
 
-	sed "s/\datadelimiter.*\"datadelimiter=,/" ./resources/job.config > ./resources/job2.config
+	sed "s/\datadelimiter.*\/datadelimiter=,/" ./resources/job.config > ./resources/job2.config
 	mv ./resources/job2.config ./resources/job.config
 	aws s3 cp ./resources/job.config s3://stage-$studyid-etl/resources/job.config
 
