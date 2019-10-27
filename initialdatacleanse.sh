@@ -48,7 +48,20 @@ if [ "${2^^}" != "Y" ];
       java -jar DbgapTreeBuilder.jar -propertiesfile resources/job.config -encodedlabel $2
 fi
 
-cp completed/* data/
+sed "s/dataquotedstring=.*/dataquotedstring=\"/" resources/job.config > resources/job2.config
+
+mv resources/job2.config resources/job.config
+
+echo ''
+echo '------------------------'
+echo 'Syncing data back to cloud'
+# sync built structure ready for data load
+rm -rf data/*
+
+mv completed/* data/
+
+aws s3 cp data/ s3://stage-$1-etl/data/ --recursive
+aws s3 cp resources/job.config s3://stage-$1-etl/resources/job.config
 
 echo ''
 echo '------------------------'
@@ -57,13 +70,10 @@ java -jar DataAnalyzer.jar -propertiesfile resources/job.config -Xmx20g
 
 echo ''
 echo '------------------------'
-echo 'Syncing data back to cloud'
-# sync built structure ready for data load
-aws s3 cp completed/ s3://stage-$1-etl/data/ --recursive
+echo 'Syncing new mapping and config files back to the cloud'
 aws s3 cp mappings/mapping.csv s3://stage-$1-etl/mappings/mapping.csv
 aws s3 cp mappings/bad_mappings.csv s3://stage-$1-etl/mappings/bad_mappings.csv
 aws s3 cp mappings/mapping.csv.patient s3://stage-$1-etl/mappings/mapping.csv.patient
-aws s3 cp data/ s3://stage-$1-etl/data/ --recursive
 
 # Sync config files
 aws s3 cp resources/job.config s3://stage-$1-etl/resources/job.config
@@ -74,7 +84,7 @@ echo '------------------------'
 echo 'Running data evaluation'
 # Run Data Evaluation
 
-java -jar DataEvaluation.jar -propertiesfile resources/job.config
+java -jar DataEvaluation.jar -propertiesfile resources/job.config -Xmx20g
 
 echo ''
 echo '------------------------'

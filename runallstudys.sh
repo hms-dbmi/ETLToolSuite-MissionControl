@@ -2,14 +2,13 @@
 
 NPROC=$(nproc --all)
 #NPROC=$(sysctl -n hw.physicalcpu)
-studyids=("aric" "mesa" "fhs" "whi" "safs" "sage" "sarcoidosis" "sas" "thrv" "cfs" "chs" "copdgene" "cra")
+#studyids=("aric" "mesa" "fhs" "whi" "safs" "sage" "sarcoidosis" "sas" "thrv" "cfs" "chs" "copdgene" "cra")
 
-studyids=( "bags" "ccaf" "dhs" "eocopd" "galaii" "genestar" "genoa" "gensalt" "goldn" "hchs" "hrmn" "hvh" "hypergen" "jhs" "mghaf" "partners" "vafar" "vuaf" "wghs" "hvh" "jhs" "mayovte")
-
-#studyids=(   
+#studyids=( "bags" "ccaf" "dhs" "eocopd" "galaii" "genestar" "genoa" "gensalt" "goldn" "hchs" "hrmn" "hvh" "hypergen" "jhs" "mghaf" "partners" "vafar" "vuaf" "wghs" "hvh" "jhs" "mayovte")
 
 for studyid in ${studyids[@]}; do
-
+	rm -rf completed/*
+	aws s3 rm s3://stage-${studyid}-etl/completed/ --recursive
 	#pull runpartition.json and job.config
 	aws s3 cp s3://stage-${studyid}-etl/runpartition.json .
 	aws s3 cp s3://stage-${studyid}-etl/resources/job.config ./resources/job.config
@@ -38,6 +37,7 @@ for studyid in ${studyids[@]}; do
 			echo ${studyid} ' patient count does not match expected' > $(hostname)_badstudy.bad
 			echo 'Actual patient count ' patcount 'expected_count'
 			echo 'Actual patient count ' patcount 'expected_count' expected_count > $(hostname)_badstudy.bad
+			aws s3 cp completed/ s3://stage-${studyid}-etl/completed/ --recursive
 	fi
 
 	aws s3 cp /var/logs/main.log s3://stage-general-etl/logs/${studyid}_main.log
