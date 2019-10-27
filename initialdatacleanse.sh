@@ -49,9 +49,10 @@ if [ "${2^^}" != "Y" ];
 fi
 
 sed "s/dataquotedstring=.*/dataquotedstring=\"/" resources/job.config > resources/job2.config
-sed "s/datadelimiter=.*/datadelimiter=,/" resources/job2.config > resources/job.config
+sed "s/datadelimiter=.*/datadelimiter=,/" resources/job2.config > resources/job3.config
 
-mv resources/job2.config resources/job.config
+mv resources/job3.config resources/job.config
+rm resources/job2.config
 
 echo ''
 echo '------------------------'
