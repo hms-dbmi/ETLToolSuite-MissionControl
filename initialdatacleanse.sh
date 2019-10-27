@@ -18,7 +18,7 @@ echo '------------------------'
 echo 'Building config files.'
 cp template/job.config resources/job.config
 # update job config trial id
-sed "s/trialid.*/trailid=${1^^}/" resources/job.config > processing/new.config
+sed "s/trialid.*/trialid=${1^^}/" resources/job.config > processing/new.config
 sed "s/rootnode=.*/rootnode=/" processing/new.config > processing/new2.config
 sed "s/dataquotedstring=.*/dataquotedstring=ç/" processing/new2.config > processing/new3.config
 
@@ -49,6 +49,7 @@ if [ "${2^^}" != "Y" ];
 fi
 
 sed "s/dataquotedstring=.*/dataquotedstring=\"/" resources/job.config > resources/job2.config
+sed "s/datadelimiter=.*/datadelimiter=,/" resources/job2.config > resources/job.config
 
 mv resources/job2.config resources/job.config
 
