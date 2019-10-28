@@ -10,10 +10,13 @@ studyids=( "bags" )
 #studyids=( "bags" "ccaf" "dhs" "eocopd" "galaii" "genestar" "genoa" "gensalt" "goldn" "hchs" "hrmn" "hvh" "hypergen" "jhs" "mghaf" "partners" "vafar" "vuaf" "wghs" "hvh" "jhs" "mayovte")
 
 for studyid in ${studyids[@]}; do
-
-	#pull runpartition.json and job.config
-	aws s3 cp s3://stage-$studyid-etl/runpartition.json .
-	aws s3 cp s3://stage-$studyid-etl/resources/job.config ./resources/job.config
+	bash cleanupfolders.sh
+	# pull study folders
+	aws s3 cp s3://stage-$studyid-etl/runpartition.json runpartition.json
+	aws s3 cp s3://stage-$studyid-etl/resources/job.config resources/job.config
+	aws s3 cp s3://stage-$studyid-etl/mappings/mapping.csv mappings/mapping.csv
+	aws s3 cp s3://stage-$studyid-etl/mappings/mapping.csv.patient mappings/mapping.csv.patient
+	aws s3 cp s3://stage-$studyid-etl/data/ data/ --recursive
 
 	sed "s/datadelimiter.*/datadelimiter=,/" ./resources/job.config > ./resources/job2.config
 	mv ./resources/job2.config ./resources/job.config
