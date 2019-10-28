@@ -10,7 +10,9 @@ studyids=( "bags" )
 #studyids=( "bags" "ccaf" "dhs" "eocopd" "galaii" "genestar" "genoa" "gensalt" "goldn" "hchs" "hrmn" "hvh" "hypergen" "jhs" "mghaf" "partners" "vafar" "vuaf" "wghs" "hvh" "jhs" "mayovte")
 
 for studyid in ${studyids[@]}; do
+
 	bash cleanupfolders.sh
+	
 	# pull study folders
 	aws s3 cp s3://stage-$studyid-etl/runpartition.json runpartition.json
 	aws s3 cp s3://stage-$studyid-etl/resources/job.config resources/job.config
@@ -33,7 +35,7 @@ for studyid in ${studyids[@]}; do
 
 	aws s3 cp s3://stage-general-etl/data_evaluations/${studyid}_dataevaluation.txt ./resources/dataevaluation.txt
 
-	aws s3 cp s3://stage-${studyid}-etl/completed/ ./completed/ --recursive
+	aws s3 cp ./completed/ s3://stage-${studyid}-etl/completed/ --recursive
 
 	aws s3 cp /var/logs/main.log s3://stage-general-etl/logs/${studyid}_main.log
 
