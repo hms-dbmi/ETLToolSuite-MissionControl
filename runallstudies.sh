@@ -11,8 +11,11 @@ studyids=( "bags" )
 
 for studyid in ${studyids[@]}; do
 
+	# clean up folder structure and completed bucket in s3
 	bash cleanupfolders.sh
 	
+	aws s3 rm s3://stage-$studyid-etl/completed/ --recursive
+
 	# pull study folders
 	aws s3 cp s3://stage-$studyid-etl/runpartition.json runpartition.json
 	aws s3 cp s3://stage-$studyid-etl/resources/job.config resources/job.config
