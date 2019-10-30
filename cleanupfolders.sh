@@ -1,11 +1,11 @@
 #!/bin/bash
 
-rm -rf completed/*
-rm -rf data/*
-rm -rf dict/*
+find completed/ -type f -exec rm -rf {} \;
+find data/ -type f -exec rm -rf {} \;
+find dict/ -type f -exec rm -rf {} \;
 rm -rf mappings/mapping.csv
 rm -rf mappings/mapping.csv.patient
-rm -rf mappings/mapping.part*
-rm -rf resources/config.part*
-rm -rf processing/*
+find mappings/ -type f -exec rm -rf {} \;
+find resources/ -type f -exec rm -rf {} \;
+find processing/ -type f -exec rm -rf {} \;
 rm -rf runpartition.json
