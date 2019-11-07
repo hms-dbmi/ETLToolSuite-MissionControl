@@ -27,8 +27,8 @@ with open(projecthome + '/runpartition.json') as json_data:
     syncproject = data.get('syncproject', 'N').upper()
     #runcurator = data.get('runcurator', 'Y').upper()
     runcurator = 'N'
-    #rundataeval = data.get('rundataeval', 'Y').upper()
-    rundataeval = 'N'
+    rundataeval = data.get('rundataeval', 'Y').upper()
+    #rundataeval = 'N'
     runpartitioning = data.get('runpartitioning', 'Y').upper()
     rungenerator = data.get('rungenerator', 'Y').upper()
     rundataload = data.get('rundataload', 'Y').upper()
@@ -128,8 +128,7 @@ if runcurator == 'Y':
     #mainlogger.info(''.join(stdout))
     #mainlogger.error(''.join(stderr))
 ## Data Evaluations
-if rundataeval == 'Y':
-    args = ['java', '-jar', 'DataEvaluation.jar', '-propertiesfile', jobconfig]
+
 if rundataeval == 'Y':
     args = ['java', '-jar', 'DataEvaluation.jar', '-propertiesfile', jobconfig]
     mainlogger.info('Starting: ' + ' '.join(args))
