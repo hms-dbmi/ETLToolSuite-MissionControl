@@ -1,0 +1,3 @@
+[submodule "ETL-MissionControl-dbgap-submodule"]
+	path = ETL-MissionControl-dbgap-submodule
+	url = https://github.com/hms-dbmi/ETL-MissionControl-dbgap-submodule
