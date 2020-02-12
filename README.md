@@ -1,11 +1,11 @@
-###Mission Control User Guide
+### Mission Control User Guide
 
 This guide will show how to best utilize the processes it contains.
 
 The guide will utilize some other technologies such as AWS in order to show 
 the complete workflow of the ETL.  
 
-#Prerequistes
+# Prerequistes
 In order to follow this guide you will need the following prereqs.
 
 * git credentials for hms/dbmi.
@@ -15,7 +15,7 @@ In order to follow this guide you will need the following prereqs.
 
 For this example we will be using the NHANES data set.  Which is publicly available and hosted in a hms/dbmi s3 read only bucket.
 
-#Setup:
+# Setup:
 Here we will prepare the ec2 by installing any required software and git projects on the ec2 to run the Nhanes ETL.
 
 1.  ssh into the ec2.  If you are running this on a local machine ignore this step.
@@ -30,7 +30,7 @@ Here we will prepare the ec2 by installing any required software and git project
 6.  add the Mission Control submodule for Nhanes.  
 `git submodule add https://github.com/hms-dbmi/ETL-MissionControl-Nhanes-submodule`
 
-#Executing the ETL:
+# Executing the ETL:
 In this section we will be executing a script that will create the allConcepts.csv that is required to create the javabins for HPDS:
 *  Pulls necessary etl files ( data files, mapping file, job configuration ) from the nhanes s3 ( avillach-73-nhanes-etl )
 *  executes the GenerateAllConcepts jar that will build the allConcepts.csv
