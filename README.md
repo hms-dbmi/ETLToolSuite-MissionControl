@@ -1,16 +1,16 @@
-# Mission Control User Guide
+# Mission Control Basic Guide
 
-This guide will show an example of how to run the Nhanes public data set and generate the javabins needed to load an instance of HPDS.
+This guide will show an example of how to generate the javabins needed to load an instance of HPDS.
 
-## Prerequistes
-In order to follow this guide you will need the following prereqs.
+For this example we will be using the NHANES data set.  Which is publicly available and hosted in a hms/dbmi s3 read only bucket.
+
+## Prerequisites
+In order to follow this guide you will need the following prerequisites.
 
 * git credentials for hms/dbmi.
 * AWS credentials ( Required if you want to pull and store the Nhanes data and configurations from s3 ).  
-  or the ec2 needs to have an iam role attached that allows access to the bucket.
-* An AWS ec2 ( All testing is done Centos7 instances ) with sudo access.
-
-For this example we will be using the NHANES data set.  Which is publicly available and hosted in a hms/dbmi s3 read only bucket.
+  or an ec2 instance with an attached iam role that allows access to avillach-73-nhanes-etl s3 bucket.
+* An AWS ec2 ( All testing is done on Centos7 instances ) with sudo access.
 
 ## Setup:
 Here we will prepare the ec2 by installing any required software and git projects on the ec2 to run the Nhanes ETL.
