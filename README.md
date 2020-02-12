@@ -1,9 +1,6 @@
 # Mission Control User Guide
 
-This guide will show how to best utilize the processes it contains.
-
-The guide will utilize some other technologies such as AWS in order to show 
-the complete workflow of the ETL.  
+This guide will show an example of how to run the Nhanes public data set and generate the javabins needed to load an instance of HPDS.
 
 ## Prerequistes
 In order to follow this guide you will need the following prereqs.
