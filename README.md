@@ -20,7 +20,7 @@ Here we will prepare the ec2 by installing any required software and git project
 `su -c "yum install java-1.8.0-openjdk"`
 3.  Install git:  
 `su -c "yum install git"`
-4.  clone the main Mission Control Project with tag v1.0.0  
+4.  clone the main Mission Control Project with tag v2.0.0  
 `git clone --recurse-submodules -j8 --branch releasev1.0.0 https://github.com/hms-dbmi/ETLToolSuite-MissionControl`
 5.  change directory to the Mission Control git project.  
 `cd ETLToolSuite-MissionControl`
