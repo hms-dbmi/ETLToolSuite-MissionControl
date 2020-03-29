@@ -9,6 +9,4 @@
 /processing/*
 /resources/job.config
 /resources/dataevaluation.txt
-runpartition.json
-/runpartition.py
 /HarmonizedPatientsWithConsentInfo.csv
