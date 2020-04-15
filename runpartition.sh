@@ -17,7 +17,7 @@ for filename in ${resdir}${configfile}; do
 
         if [ $(ps aux | grep DataAnalyzer.jar | wc -l) -gt ${maxjobs} ]
            then
-                sleep 1
+                sleep .1
         fi
 
 done
