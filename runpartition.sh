@@ -13,7 +13,7 @@ done
 
 for filename in ${resdir}${configfile}; do
 
-        nohup java -jar DataAnalyzer.jar -propertiesfile $filename -Xmx${memory} > /var/logs/${configfile}.log &
+        nohup java -jar DataAnalyzer.jar -propertiesfile $filename -Xmx${memory} > /var/logs/${configfile}.log 2>&1
 
         if [ $(ps aux | grep DataAnalyzer.jar | wc -l) -gt ${maxjobs} ]
            then
@@ -24,7 +24,7 @@ done
 
 for filename in ${resdir}${configfile}; do
 
-        nohup java -jar GenerateAllConcepts.jar -propertiesfile $filename -Xmx${memory} >> /var/logs/${configfile}.log & 
+        nohup java -jar GenerateAllConcepts.jar -propertiesfile $filename -Xmx${memory} >> /var/logs/${configfile}.log 2>&1 
 
         if [ $(ps aux | grep GenerateAllConcepts.jar | wc -l) -gt ${maxjobs} ]
            then
