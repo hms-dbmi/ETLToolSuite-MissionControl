@@ -12,22 +12,22 @@ esac
 done
 
 for filename in ${resdir}${configfile}; do
+    echo $filename
+    nohup java -jar DataAnalyzer.jar -propertiesfile $filename -Xmx${memory} > /var/logs/${configfile}.log 2>&1 &
 
-        nohup java -jar DataAnalyzer.jar -propertiesfile $filename -Xmx${memory} > /var/logs/${configfile}.log 2>&1 &
-
-        while [ $(ps aux | grep DataAnalyzer.jar | wc -l) -gt ${maxjobs} ]; do
-           
-           sleep .1
-        done
+    while [ $(ps aux | grep DataAnalyzer.jar | wc -l) -gt ${maxjobs} ]; do
+       
+       sleep .1
+    done
 
 done
 
 for filename in ${resdir}${configfile}; do
 
-        nohup java -jar GenerateAllConcepts.jar -propertiesfile $filename -Xmx${memory} >> /var/logs/${configfile}.log 2>&1 &
+    nohup java -jar GenerateAllConcepts.jar -propertiesfile $filename -Xmx${memory} >> /var/logs/${configfile}.log 2>&1 &
 
-        while [ $(ps aux | grep GenerateAllConcepts.jar | wc -l) -gt ${maxjobs} ]; do
-           then
-                sleep 1
-        done
+    while [ $(ps aux | grep GenerateAllConcepts.jar | wc -l) -gt ${maxjobs} ]; do
+       then
+            sleep 1
+    done
 done
