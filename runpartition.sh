@@ -12,7 +12,7 @@ esac
 done
 
 for filename in ${resdir}${configfile}; do
-        nohup java -jar GenerateAllConcepts.jar -propertiesfile $filename -Xmx${memory} & 
+        nohup java -jar GenerateAllConcepts.jar -propertiesfile $filename -Xmx${memory} > /var/logs/${configfile}.log & 
 
         if [ $(ps aux | grep GenerateAllConcepts.jar | wc -l) -gt ${maxjobs} ]
            then
