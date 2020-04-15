@@ -16,15 +16,15 @@ for filename in ${resdir}${configfile}; do
     nohup java -jar DataAnalyzer.jar -propertiesfile $filename -Xmx${memory} > /var/logs/${configfile}.log &
 
     while [ $(ps aux | grep DataAnalyzer.jar | wc -l) -gt ${maxjobs} ]; do
-       
-       sleep 1
+    
+       sleep .2
 
     done
 
 done
 
 for filename in ${resdir}${configfile}; do
-
+    echo $filename
     nohup java -jar GenerateAllConcepts.jar -propertiesfile $filename -Xmx${memory} >> /var/logs/${configfile}.log &
 
     while [ $(ps aux | grep GenerateAllConcepts.jar | wc -l) -gt ${maxjobs} ]; do
