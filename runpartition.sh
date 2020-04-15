@@ -17,7 +17,7 @@ for filename in ${resdir}${configfile}; do
 
         if [ $(ps aux | grep DataAnalyzer.jar | wc -l) -gt ${maxjobs} ]
            then
-                sleep 5
+                sleep 1
         fi
 
 done
@@ -28,6 +28,6 @@ for filename in ${resdir}${configfile}; do
 
         if [ $(ps aux | grep GenerateAllConcepts.jar | wc -l) -gt ${maxjobs} ]
            then
-                sleep 5
+                sleep 1
         fi
 done
