@@ -15,7 +15,7 @@ for filename in ${resdir}${configfile}; do
     echo $filename
     nohup java -jar DataAnalyzer.jar -propertiesfile $filename -Xmx${memory} > /var/logs/${configfile}.log &
 
-    while [ $(ps aux | grep DataAnalyzer.jar | wc -l) -gt ( ${maxjobs} \* 5 ) ]; do
+    while [ $(ps aux | grep DataAnalyzer.jar | wc -l) -gt $(expr ${maxjobs} \* 5 ) ]; do
     
        sleep .2
 
