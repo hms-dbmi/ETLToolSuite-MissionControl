@@ -23,7 +23,7 @@ for filename in ${resdir}${configfile}; do
 
 done
 
-while [ $(ps aux | grep DataAnalyzer.jar | wc -l) -gt 0 ]; do
+while [ $(ps aux | grep DataAnalyzer.jar | wc -l) -gt 1 ]; do
 
    sleep .2
 
@@ -38,7 +38,7 @@ for filename in ${resdir}${configfile}; do
     done
 done
 
-while [ $(ps aux | grep GenerateAllConcepts.jar | wc -l) -gt 0 ]; do
+while [ $(ps aux | grep GenerateAllConcepts.jar | wc -l) -gt 1 ]; do
 
    sleep .2
 
