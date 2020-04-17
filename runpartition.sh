@@ -15,7 +15,7 @@ for filename in ${resdir}${configfile}; do
     echo $filename
     nohup java -jar DataAnalyzer.jar -propertiesfile $filename -Xmx${memory} > /var/logs/${configfile}.log &
 
-    while [ $(ps aux | grep DataAnalyzer.jar | wc -l) -gt $(expr ${maxjobs} \* 5 ) ]; do
+    while [ $(ps aux | grep DataAnalyzer.jar | wc -l) -gt $(nproc) ]; do
     
        sleep .2
 
@@ -23,11 +23,23 @@ for filename in ${resdir}${configfile}; do
 
 done
 
+while [ $(ps aux | grep DataAnalyzer.jar | wc -l) -gt 0 ]; do
+
+   sleep .2
+
+done
+
 for filename in ${resdir}${configfile}; do
     echo $filename
     nohup java -jar GenerateAllConcepts.jar -propertiesfile $filename -Xmx${memory} >> /var/logs/${configfile}.log &
 
-    while [ $(ps aux | grep GenerateAllConcepts.jar | wc -l) -gt ${maxjobs} ]; do
+    while [ $(ps aux | grep GenerateAllConcepts.jar | wc -l) -gt $(nproc) ]; do
         sleep .2
     done
+done
+
+while [ $(ps aux | grep GenerateAllConcepts.jar | wc -l) -gt 0 ]; do
+
+   sleep .2
+
 done
