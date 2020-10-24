@@ -11,29 +11,18 @@ in
 esac
 done
 
-for filename in ${resdir}${configfile}; do
-    echo $filename
-    nohup java -jar DataAnalyzer.jar -propertiesfile $filename -Xmx${memory} > /var/logs/${configfile}.log &
+echo ${memory}
+echo $maxjobs
+echo $configfile
+echo $resdir
 
-    while [ $(ps aux | grep DataAnalyzer.jar | wc -l) -gt $(nproc) ]; do
-    
-       sleep .2
-
-    done
-
-done
-
-while [ $(ps aux | grep DataAnalyzer.jar | wc -l) -gt 1 ]; do
-
-   sleep .2
-
-done
+mkdir etl_logs
 
 for filename in ${resdir}${configfile}; do
     echo $filename
-    nohup java -jar GenerateAllConcepts.jar -propertiesfile $filename -Xmx${memory} >> /var/logs/${configfile}.log &
+    nohup java -jar GenerateAllConcepts.jar -propertiesfile $filename -Xmx${memory} >> etl_logs/${configfile}.log &
 
-    while [ $(ps aux | grep GenerateAllConcepts.jar | wc -l) -gt $(nproc) ]; do
+    while [ $(ps aux | grep GenerateAllConcepts.jar | wc -l) -gt ${maxjobs} ]; do
         sleep .2
     done
 done
